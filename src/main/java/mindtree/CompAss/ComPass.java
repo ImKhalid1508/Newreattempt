@@ -1,5 +1,7 @@
 package mindtree.CompAss;
 
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -29,8 +31,32 @@ public class ComPass {
 		//.click on No.1detergent link
 		driver.findElement(By.xpath("//a[@href='/en-us/our-commitment/americas-number-one-detergent']")).click();
 		
+		//.click on the register button 
+		Thread.sleep(4000L);
+		driver.findElement(By.xpath("//a[@href='/en-us/sign-in']")).click();
 		
-
+		//.Click on Signup button
+		driver.findElement(By.cssSelector("a[href*='/signup/tide-coupons/']")).click();
+		System.out.println(driver.findElement(By.cssSelector("a[href*='/signup/tide-coupons/']")).getText());
+		System.out.println(driver.getTitle());
+		
+		
+		//Windows switching
+		Set <String> ids=driver.getWindowHandles();
+		Iterator <String> it=ids.iterator();
+		String Pid= it.next();
+		String Cid=it.next();
+		driver.switchTo().window(Cid);
+		System.out.println(driver.getTitle());
+		
+		
+		driver.findElement(By.xpath("//input[@id='name']")).sendKeys("Kh12lid");
+		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("Ansh001@gmail.com");
+		driver.findElement(By.xpath("//input[@id='password']")).sendKeys("Khalid@123");
+		driver.findElement(By.xpath("//input[@value='CREATE ACCOUNT']")).click();
+		driver.switchTo().window(Pid);
+		System.out.println(driver.getTitle());
+		
 	}
 
 }
